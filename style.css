@@ -50,6 +50,99 @@ nav svg {
   cursor: pointer;
 }
 
+/* 模態框的背景 */
+.modal {
+  display: none; /* 初始狀態隱藏 */
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+/* 模態框內容 */
+.modal-content {
+  background-color: #fff;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+  max-width: 400px;
+  text-align: left;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* 關閉按鈕 */
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* 社交登入按鈕 */
+.social-login {
+  display: block;
+  margin: 10px auto;
+  padding: 10px;
+  width: 90%;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.facebook {
+  background-color: #0066FF;
+  color: #fff;
+}
+
+.google {
+  background-color: #fff;
+  color: #000;
+  border: 1px solid #000;
+}
+
+.apple {
+  background-color: #000;
+  color: #fff;
+}
+
+
+.main-login {
+  background-color: #D70F64;
+  color: #fff;
+  padding: 10px;
+  width: 90%;
+  border: none;
+  border-radius: 5px;
+  margin: 5px 0;
+  cursor: pointer;
+}
+
+.main-register {
+  background-color: #fff;
+  color: #000;
+  padding: 10px;
+  width: 90%;
+  border: 2px solid #000;
+  border-radius: 5px;
+  margin: 5px 0;
+  cursor: pointer;
+}
+
 nav .login-btn {
   display: none;
   justify-content: center;
