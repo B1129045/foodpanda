@@ -1,0 +1,19 @@
+<div><script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "foodpanda Taiwan",
+  "url": "https://www.foodpanda.com.tw/",
+  "logo": "https://ridershop.foodpanda.sg/cdn/shop/files/foodpanda_logo-RGB_horizontal_046b56f4-c577-48b0-ad97-e21cfeb88770_1046x209.jpg",
+  "description": "foodpanda: food and grocery delivery. Save on tasty takeaways. On the go? Try pick-up! Skip the queue and save up when you self-collect your order. Worry-free package delivery. Need to send or receive a parcel? Go with pandago. Our reliable fleet will safely deliver it for you in no time.",
+  "sameAs": [
+    "https://www.facebook.com/foodpandataiwan",
+    "https://instagram.com/foodpanda_taiwan",
+    "https://www.youtube.com/channel/UCwpTgVtgSVW5h6NuM0i1w6A",
+    "https://www.linkedin.com/company/foodpanda",
+"https://play.google.com/store/apps/details?id=com.global.foodpanda.android",
+    "https://apps.apple.com/us/app/foodpanda-food-groceries/id758103884",
+    "https://appgallery.huawei.com/app/C101812091"
+  ]
+}
+</script></div>

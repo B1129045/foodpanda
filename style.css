@@ -221,9 +221,9 @@ section.hero {
 }
 
 .container .card {
-  height: 272px;
-  min-width: 230px;
-  max-width: 230px;
+  height: 255px;
+  min-width: 255px;
+  max-width: 255px;
   position: relative;
   overflow: hidden;
   cursor: pointer;
