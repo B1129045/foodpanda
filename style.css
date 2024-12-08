@@ -126,6 +126,12 @@ nav svg {
   color: #fff;
 }
 
+.button-container {
+  display: flex;            /* 使用彈性佈局 */
+  flex-direction: column;   /* 垂直排列子元素 */
+  align-items: center;      /* 子元素水平置中 */
+  justify-content: center;  /* 子元素垂直置中（如需要） */ 
+}
 
 .main-login {
   background-color: #D70F64;
