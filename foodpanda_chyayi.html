@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Foodpanda Page - 嘉義市</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f8f8;
+        }
+        .header {
+            background-color: #fff;
+            padding: 10px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .header img {
+            height: 40px;
+        }
+        .content {
+            padding: 20px;
+        }
+        .restaurants {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        .restaurant {
+            background-color: #fff;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+        .restaurant:hover {
+            transform: scale(1.03);
+        }
+        .restaurant img {
+            width: 100%;
+            height: auto;
+        }
+        .details {
+            padding: 15px;
+        }
+        .details h3 {
+            margin: 0 0 10px;
+            font-size: 18px;
+        }
+        .details p {
+            margin: 0;
+            color: #888;
+        }
+        .details .rating {
+            color: #ff9800;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+            margin-bottom: 10px;
+        }
+        .tag {
+            background-color: #ff4081;
+            color: #fff;
+            font-size: 12px;
+            padding: 5px 10px;
+            border-radius: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <img src="https://www.foodpanda.com/logo" alt="Foodpanda Logo">
+        <span>位置: 嘉義市</span>
+    </div>
+    <div class="content">
+        <h1>所有餐廳</h1>
+        <div class="restaurants">
+            <div class="restaurant">
+                <img src="https://via.placeholder.com/300x150" alt="嘉義小吃">
+                <div class="details">
+                    <div class="tags">
+                        <span class="tag">滿 $200 享 9 折</span>
+                    </div>
+                    <h3>嘉義小吃</h3>
+                    <p>台式 · 嘉義市區</p>
+                    <p class="rating">⭐ 4.6 (200+)</p>
+                </div>
+            </div>
+            <div class="restaurant">
+                <img src="https://via.placeholder.com/300x150" alt="嘉義燒肉店">
+                <div class="details">
+                    <div class="tags">
+                        <span class="tag">限時優惠: 免運費</span>
+                    </div>
+                    <h3>嘉義燒肉店</h3>
+                    <p>燒肉 · 嘉義市東區</p>
+                    <p class="rating">⭐ 4.7 (350+)</p>
+                </div>
+            </div>
+            <div class="restaurant">
+                <img src="https://via.placeholder.com/300x150" alt="嘉義義式餐廳">
+                <div class="details">
+                    <div class="tags">
+                        <span class="tag">滿 $300 享 8.5 折</span>
+                    </div>
+                    <h3>嘉義義式餐廳</h3>
+                    <p>義式料理 · 嘉義市區</p>
+                    <p class="rating">⭐ 4.8 (150+)</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
