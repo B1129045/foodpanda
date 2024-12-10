@@ -846,3 +846,10 @@ footer .branding {
   font-weight: bold;
   left: 30px;
 }
+
+/* 新增圖片樣式 */
+.restaurant img {
+    width: 100%; /* 確保圖片寬度為100% */
+    height: auto; /* 自動調整高度以保持比例 */
+    border-radius: 10px 10px 0 0; /* 圓角效果，與卡片一致 */
+}
