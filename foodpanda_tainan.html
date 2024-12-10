@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Foodpanda Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f8f8;
+        }
+        .header {
+            background-color: #fff;
+            padding: 10px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .header img {
+            height: 40px;
+        }
+        .content {
+            padding: 20px;
+        }
+        .restaurants {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        .restaurant {
+            background-color: #fff;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+        .restaurant:hover {
+            transform: scale(1.03);
+        }
+        .restaurant img {
+            width: 100%;
+            height: auto;
+        }
+        .details {
+            padding: 15px;
+        }
+        .details h3 {
+            margin: 0 0 10px;
+            font-size: 18px;
+        }
+        .details p {
+            margin: 0;
+            color: #888;
+        }
+        .details .rating {
+            color: #ff9800;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+            margin-bottom: 10px;
+        }
+        .tag {
+            background-color: #ff4081;
+            color: #fff;
+            font-size: 12px;
+            padding: 5px 10px;
+            border-radius: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <img src="https://www.foodpanda.com/logo" alt="Foodpanda Logo">
+        <span>位置: 台南市</span>
+    </div>
+    <div class="content">
+        <h1>所有餐廳</h1>
+        <div class="restaurants">
+            <div class="restaurant">
+                <img src="https://via.placeholder.com/300x150" alt="滿滿深夜食堂">
+                <div class="details">
+                    <div class="tags">
+                        <span class="tag">迎新禮: 免外送服務費</span>
+                    </div>
+                    <h3>滿滿深夜食堂</h3>
+                    <p>Taiwanese</p>
+                    <p class="rating">⭐ 4.7 (500+)</p>
+                </div>
+            </div>
+            <div class="restaurant">
+                <img src="https://via.placeholder.com/300x150" alt="88嫩仙草(台台南光明店)">
+                <div class="details">
+                    <div class="tags">
+                        <span class="tag">迎新禮: 免外送服務費</span>
+                    </div>
+                    <h3>88嫩仙草(台台南光明店)</h3>
+                    <p>Taiwanese</p>
+                    <p class="rating">⭐ 4.8 (100+)</p>
+                </div>
+            </div>
+            <div class="restaurant">
+                <img src="https://via.placeholder.com/300x150" alt="阿牛牛肉湯二館">
+                <div class="details">
+                    <div class="tags">
+                        <span class="tag">迎新禮: 免外送服務費</span>
+                    </div>
+                    <h3>阿牛牛肉湯二館</h3>
+                    <p>Taiwanese</p>
+                    <p class="rating">⭐ 4.9 (1000+)</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
