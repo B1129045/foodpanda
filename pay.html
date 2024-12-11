@@ -16,13 +16,30 @@
             color: #333;
         }
 
+        #checkout-container {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            padding: 30px;
+            gap: 20px;
+        }
+
         #checkout-page {
+            flex: 1;
             max-width: 600px;
-            margin: 30px auto;
             padding: 20px;
             background-color: white;
             border-radius: 10px;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        #checkout-summary-container {
+            width: 300px;
+            padding: 20px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            height: fit-content;
         }
 
         #checkout-summary {
@@ -71,6 +88,7 @@
             text-align: right;
             font-size: 18px;
             font-weight: bold;
+            color: #ff5a5f; /* FOODPANDA 粉色 */
         }
 
         #delivery-options {
@@ -166,72 +184,75 @@
 </head>
 
 <body>
-    <div id="checkout-page">
-        <h2>結帳</h2>
+    <div id="checkout-container">
+        <div id="checkout-page">
+            <h2>結帳</h2>
 
-        <!-- 訂購商品摘要 -->
-        <div id="checkout-summary">
-            <h3>訂購商品</h3>
-            <div id="cart-summary-items">
-                <!-- 這裡會顯示訂購商品 -->
+            <!-- 外送選項 -->
+            <div id="delivery-options">
+                <h3>外送選項</h3>
+                <div class="delivery-option">
+                    <input type="radio" name="delivery" id="standard-delivery" value="standard" checked>
+                    <label for="standard-delivery">標準 約 30 - 45 分鐘</label>
+                </div>
+                <div class="delivery-option">
+                    <input type="radio" name="delivery" id="priority-delivery" value="priority">
+                    <label for="priority-delivery">優先專送 約 25 - 40 分鐘 + $29</label>
+                </div>
+                <div class="delivery-option">
+                    <input type="radio" name="delivery" id="scheduled-delivery" value="scheduled">
+                    <label for="scheduled-delivery">預約訂單 選擇日期及時間</label>
+                </div>
             </div>
-            <div id="cart-total">
-                總金額: <strong>0 元</strong>
+
+            <!-- 付款方式 -->
+            <div id="payment-method-options">
+                <h3>付款方式</h3>
+                <div class="payment-option">
+                    <input type="radio" name="payment-method" id="cash-payment" value="cash">
+                    <img src="https://via.placeholder.com/50x30?text=現金" alt="現金圖示">
+                    <label for="cash-payment">現金付款</label>
+                </div>
+                <div class="payment-option">
+                    <input type="radio" name="payment-method" id="credit-card-payment" value="credit-card">
+                    <img src="https://via.placeholder.com/50x30?text=信用卡" alt="信用卡圖示">
+                    <label for="credit-card-payment">
+                        信用卡
+                    </label>
+                </div>
+                <div class="payment-option">
+                    <input type="radio" name="payment-method" id="line-pay-payment" value="line-pay">
+                    <img src="https://via.placeholder.com/50x30?text=LINE+PAY" alt="LINE PAY 圖示">
+                    <label for="line-pay-payment">LINE PAY</label>
+                </div>
             </div>
+
+            <!-- 表單開始 -->
+            <form id="checkout-form">
+                <label for="address">送餐地址</label>
+                <input type="text" id="address" name="address" placeholder="請輸入送餐地址" required>
+
+                <label for="name">姓名</label>
+                <input type="text" id="name" name="name" required>
+
+                <label for="phone">電話</label>
+                <input type="tel" id="phone" name="phone" required>
+
+                <button type="submit">確認訂單</button>
+            </form>
         </div>
 
-        <!-- 外送選項 -->
-        <div id="delivery-options">
-            <h3>外送選項</h3>
-            <div class="delivery-option">
-                <input type="radio" name="delivery" id="standard-delivery" value="standard" checked>
-                <label for="standard-delivery">標準 約 30 - 45 分鐘</label>
-            </div>
-            <div class="delivery-option">
-                <input type="radio" name="delivery" id="priority-delivery" value="priority">
-                <label for="priority-delivery">優先專送 約 25 - 40 分鐘 + $29</label>
-            </div>
-            <div class="delivery-option">
-                <input type="radio" name="delivery" id="scheduled-delivery" value="scheduled">
-                <label for="scheduled-delivery">預約訂單 選擇日期及時間</label>
+        <div id="checkout-summary-container">
+            <h3>您的訂單</h3>
+            <div id="checkout-summary">
+                <div id="cart-summary-items">
+                    <!-- 這裡會顯示訂購商品 -->
+                </div>
+                <div id="cart-total">
+                    總金額: <strong>0 元</strong>
+                </div>
             </div>
         </div>
-
-        <!-- 付款方式 -->
-        <div id="payment-method-options">
-            <h3>付款方式</h3>
-            <div class="payment-option">
-                <input type="radio" name="payment-method" id="cash-payment" value="cash">
-                <img src="https://via.placeholder.com/50x30?text=現金" alt="現金圖示">
-                <label for="cash-payment">現金付款</label>
-            </div>
-            <div class="payment-option">
-                <input type="radio" name="payment-method" id="credit-card-payment" value="credit-card">
-                <img src="https://via.placeholder.com/50x30?text=信用卡" alt="信用卡圖示">
-                <label for="credit-card-payment">
-                    信用卡
-                </label>
-            </div>
-            <div class="payment-option">
-                <input type="radio" name="payment-method" id="line-pay-payment" value="line-pay">
-                <img src="https://via.placeholder.com/50x30?text=LINE+PAY" alt="LINE PAY 圖示">
-                <label for="line-pay-payment">LINE PAY</label>
-            </div>
-        </div>
-
-        <!-- 表單開始 -->
-        <form id="checkout-form">
-            <label for="address">送餐地址</label>
-            <input type="text" id="address" name="address" placeholder="請輸入送餐地址" required>
-
-            <label for="name">姓名</label>
-            <input type="text" id="name" name="name" required>
-
-            <label for="phone">電話</label>
-            <input type="tel" id="phone" name="phone" required>
-
-            <button type="submit">確認訂單</button>
-        </form>
     </div>
 
     <script>
