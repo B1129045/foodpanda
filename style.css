@@ -133,6 +133,22 @@ nav svg {
   justify-content: center;  /* 子元素垂直置中（如需要） */ 
 }
 
+.button-container a {
+  width: 90%;
+  text-decoration: none;
+  display: block;
+}
+
+.button-container button {
+  width: 100%;
+  cursor: pointer;
+}
+
+/* 確保按鈕之間的間距 */
+.button-container a:not(:last-child) {
+  margin-bottom: 5px;
+}
+
 .main-login {
   background-color: #D70F64;
   color: #fff;
