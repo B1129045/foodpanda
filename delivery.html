@@ -31,35 +31,6 @@
             color: #555;
         }
 
-        .status-step {
-            margin: 10px 0;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            display: flex;
-            align-items: center;
-        }
-
-        .status-step.completed {
-            border-color: #4caf50;
-            background-color: #e8f5e9;
-            color: #388e3c;
-        }
-
-        .status-step.pending {
-            border-color: #ff9800;
-            background-color: #fff3e0;
-            color: #f57c00;
-        }
-
-        .delivery-map {
-            width: 100%;
-            height: 300px;
-            border-radius: 5px;
-            margin: 20px 0;
-            overflow: hidden;
-        }
-
         .progress-container {
             display: flex;
             align-items: center;
@@ -83,19 +54,67 @@
             transition: width 0.5s ease-in-out;
         }
 
-        .progress-segment {
-            flex: 1;
-            border-right: 1px solid white;
-            position: relative;
+        .progress-bar::before, .progress-bar::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 1px;
+            background-color: white;
         }
 
-        .progress-segment:last-child {
-            border-right: none;
+        .progress-bar::before {
+            left: 25%;
+        }
+
+        .progress-bar::after {
+            left: 50%;
         }
 
         .progress-image {
             margin-left: 10px;
             height: 120px;
+        }
+
+        .delivery-map {
+            position: relative;
+            width: 100%;
+            height: 300px;
+            border-radius: 5px;
+            margin: 20px 0;
+            overflow: hidden;
+        }
+
+        .motorbike {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            background: url('motorbike.png') no-repeat center center;
+            background-size: contain;
+            animation: moveBike 15s linear infinite;
+        }
+
+        @keyframes moveBike {
+            0% {
+                left: 0;
+                top: 10%;
+            }
+            25% {
+                left: 25%;
+                top: 30%;
+            }
+            50% {
+                left: 50%;
+                top: 50%;
+            }
+            75% {
+                left: 75%;
+                top: 70%;
+            }
+            100% {
+                left: 100%;
+                top: 90%;
+            }
         }
     </style>
 </head>
@@ -105,7 +124,7 @@
         <!-- 預估外送時間進度條 -->
         <div id="progress-bar-container">
             <h3>預估外送時間</h3>
-            <p>外送員預計在 <strong>15 分鐘內</strong> 抵達。</p>
+            <p>外送員預計在 <strong>12 秒內</strong> 抵達。</p>
             <div class="progress-container">
                 <div class="progress-bar">
                     <div class="progress-bar-inner"></div>
@@ -116,13 +135,10 @@
 
         <h2>訂單追蹤</h2>
 
-        <!-- 訂單狀態 -->
-        <div id="order-status" class="order-status">
+        <!-- 訂單狀態描述 -->
+        <div id="order-status-text" class="order-status">
             <h3>目前訂單狀態</h3>
-            <div class="status-step completed">1. 訂單已確認</div>
-            <div class="status-step completed">2. 外送員已接單</div>
-            <div class="status-step pending">3. 外送中</div>
-            <div class="status-step pending">4. 已送達</div>
+            <p id="status-description">訂單已確認。</p>
         </div>
 
         <!-- 即時追蹤 -->
@@ -137,33 +153,26 @@
                 loading="lazy" 
                 referrerpolicy="no-referrer-when-downgrade">
             </iframe>
+            <div class="motorbike"></div>
         </div>
     </div>
 
     <script>
-        // 模擬訂單狀態資料
-        let orderStatus = [
-            { step: "訂單已確認", completed: true },
-            { step: "外送員已接單", completed: true },
-            { step: "外送中", completed: false },
-            { step: "已送達", completed: false },
+        // 訂單狀態描述資料
+        const orderDescriptions = [
+            "訂單已確認。",
+            "外送員已接單，正在前往餐廳取餐。",
+            "外送員正在送餐途中。",
+            "訂單已完成，感謝您的使用！"
         ];
 
-        // 更新訂單狀態
-        function updateOrderStatus() {
-            const statusContainer = document.getElementById("order-status");
-            statusContainer.innerHTML = "<h3>目前訂單狀態</h3>";
-            orderStatus.forEach((status, index) => {
-                const statusDiv = document.createElement("div");
-                statusDiv.className = "status-step";
-                statusDiv.textContent = `${index + 1}. ${status.step}`;
-                if (status.completed) {
-                    statusDiv.classList.add("completed");
-                } else {
-                    statusDiv.classList.add("pending");
-                }
-                statusContainer.appendChild(statusDiv);
-            });
+        let currentStatusIndex = 0;
+
+        // 更新訂單狀態描述
+        function updateOrderDescription() {
+            const statusDescription = document.getElementById("status-description");
+            statusDescription.textContent = orderDescriptions[currentStatusIndex];
+            currentStatusIndex = (currentStatusIndex + 1) % orderDescriptions.length;
         }
 
         // 更新進度條
@@ -180,7 +189,7 @@
         }
 
         // 初始化頁面
-        updateOrderStatus();
+        setInterval(updateOrderDescription, 3000); // 修改為3秒
         updateProgressBar();
     </script>
 </body>
