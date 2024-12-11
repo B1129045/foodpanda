@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>訂單管理與追蹤</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background-color: #f7f7f7;
+        }
+
+        #order-tracking-page {
+            max-width: 600px;
+            margin: 30px auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        .order-status {
+            margin: 20px 0;
+            font-size: 18px;
+            color: #555;
+        }
+
+        .status-step {
+            margin: 10px 0;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+        }
+
+        .status-step.completed {
+            border-color: #4caf50;
+            background-color: #e8f5e9;
+            color: #388e3c;
+        }
+
+        .status-step.pending {
+            border-color: #ff9800;
+            background-color: #fff3e0;
+            color: #f57c00;
+        }
+
+        .delivery-map {
+            width: 100%;
+            height: 300px;
+            background-color: #ddd;
+            border-radius: 5px;
+            margin: 20px 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #555;
+        }
+
+        .notifications {
+            margin: 20px 0;
+        }
+
+        .notification {
+            margin-bottom: 10px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #fff;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="order-tracking-page">
+        <h2>訂單追蹤</h2>
+
+        <!-- 訂單狀態 -->
+        <div id="order-status" class="order-status">
+            <h3>目前訂單狀態</h3>
+            <div class="status-step completed">1. 訂單已確認</div>
+            <div class="status-step completed">2. 外送員已接單</div>
+            <div class="status-step pending">3. 外送中</div>
+            <div class="status-step pending">4. 已送達</div>
+        </div>
+
+        <!-- 即時追蹤 -->
+        <h3>即時追蹤</h3>
+        <div id="delivery-map" class="delivery-map">
+            模擬地圖顯示外送員位置
+        </div>
+
+        <!-- 預估送達時間 -->
+        <div id="estimated-time">
+            <h3>預估送達時間</h3>
+            <p>外送員預計在 <strong>15 分鐘內</strong> 抵達。</p>
+        </div>
+
+        <!-- 推送通知 -->
+        <div id="notifications" class="notifications">
+            <h3>推送通知</h3>
+        </div>
+    </div>
+
+    <script>
+        // 模擬訂單狀態資料
+        let orderStatus = [
+            { step: "訂單已確認", completed: true },
+            { step: "外送員已接單", completed: true },
+            { step: "外送中", completed: false },
+            { step: "已送達", completed: false },
+        ];
+
+        let notifications = [
+            "訂單已確認。",
+            "外送員已接單，正在前往餐廳取餐。",
+        ];
+
+        // 更新訂單狀態
+        function updateOrderStatus() {
+            const statusContainer = document.getElementById("order-status");
+            statusContainer.innerHTML = "<h3>目前訂單狀態</h3>";
+            orderStatus.forEach((status, index) => {
+                const statusDiv = document.createElement("div");
+                statusDiv.className = "status-step";
+                statusDiv.textContent = `${index + 1}. ${status.step}`;
+                if (status.completed) {
+                    statusDiv.classList.add("completed");
+                } else {
+                    statusDiv.classList.add("pending");
+                }
+                statusContainer.appendChild(statusDiv);
+            });
+        }
+
+        // 更新即時追蹤
+        function updateDeliveryMap() {
+            const deliveryMap = document.getElementById("delivery-map");
+            deliveryMap.textContent = "外送員位置正在更新中...";
+            setTimeout(() => {
+                deliveryMap.textContent = "外送員已抵達餐廳，正在取餐...";
+            }, 5000);
+            setTimeout(() => {
+                deliveryMap.textContent = "外送員正在前往您的地址...";
+            }, 10000);
+        }
+
+        // 顯示推送通知
+        function pushNotification(message) {
+            notifications.push(message);
+            const notificationContainer = document.getElementById("notifications");
+            const notificationDiv = document.createElement("div");
+            notificationDiv.className = "notification";
+            notificationDiv.textContent = message;
+            notificationContainer.appendChild(notificationDiv);
+        }
+
+        // 初始化頁面
+        updateOrderStatus();
+        updateDeliveryMap();
+
+        // 模擬推送通知
+        setTimeout(() => pushNotification("外送員正在餐廳取餐中。"), 5000);
+        setTimeout(() => pushNotification("外送員已出發，預計 15 分鐘後送達。"), 10000);
+        setTimeout(() => {
+            orderStatus[2].completed = true;
+            updateOrderStatus();
+            pushNotification("訂單已完成，感謝您的使用！");
+        }, 15000);
+    </script>
+</body>
+
+</html>
