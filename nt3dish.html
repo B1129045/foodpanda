@@ -91,7 +91,7 @@
 
     <!-- 餐廳資訊 -->
     <section class="restaurant-info">
-        <img src="https://example.com/redbeard-logo.jpg" alt="紅鬍子手工窯烤披薩 vendor logo">
+        <img src="./images/pizza.jpg" alt="紅鬍子手工窯烤披薩 vendor logo">
         <div class="restaurant-details">
             <h1>紅鬍子手工窯烤披薩</h1>
             <p>義式 · 披薩 · 店內用餐</p>
@@ -106,7 +106,7 @@
         <div class="menu-items">
             <!-- 餐點卡片 -->
             <div class="menu-card">
-                <img src="./images/margherita.jpg" alt="瑪格麗特披薩">
+                <img src="./images/ntp2a.png" alt="瑪格麗特披薩">
                 <div class="card-content">
                     <h3>瑪格麗特披薩</h3>
                     <p>從 $180</p>
@@ -115,7 +115,7 @@
                 </div>
             </div>
             <div class="menu-card">
-                <img src="./images/pepperoni.jpg" alt="辣味香腸披薩">
+                <img src="./images/ntp2b.png" alt="辣味香腸披薩">
                 <div class="card-content">
                     <h3>辣味香腸披薩</h3>
                     <p>從 $200</p>
@@ -124,7 +124,7 @@
                 </div>
             </div>
             <div class="menu-card">
-                <img src="./images/veggie.jpg" alt="蔬食披薩">
+                <img src="./images/ntp2c.png" alt="蔬食披薩">
                 <div class="card-content">
                     <h3>蔬食披薩</h3>
                     <p>從 $190</p>
@@ -146,18 +146,17 @@
         </div>
         <a href="pay.html"><button id="checkout-btn">結帳</button></a>
     </div>
-
     <script>
         // 購物車數據
-        let cart = [];
-
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    
         // 渲染購物車內容
         function updateCart() {
             const cartItemsContainer = document.getElementById('cart-items');
             cartItemsContainer.innerHTML = ''; // 清空舊的購物車項目
-
+    
             let totalPrice = 0;
-
+    
             cart.forEach(item => {
                 let listItem = document.createElement('li');
                 listItem.textContent = `${item.name} - ${item.price}元 x ${item.quantity}`;
@@ -168,10 +167,13 @@
                 cartItemsContainer.appendChild(listItem);
                 totalPrice += item.price * item.quantity;
             });
-
+    
             document.getElementById('total-price').textContent = totalPrice;
+    
+            // 將購物車內容存到 localStorage
+            localStorage.setItem('cart', JSON.stringify(cart));
         }
-
+    
         // 添加商品到購物車
         function addToCart(product) {
             const existingProduct = cart.find(item => item.name === product.name);
@@ -182,12 +184,15 @@
             }
             updateCart(); // 更新購物車顯示
         }
-
-        // 刪除商品從購物車
+    
+        // 從購物車移除商品
         function removeFromCart(productName) {
             cart = cart.filter(item => item.name !== productName);
-            updateCart(); // 更新購物車顯示
+            updateCart();
         }
+    
+        // 頁面載入時初始化購物車
+        updateCart();
     </script>
 
 </body>

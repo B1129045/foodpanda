@@ -231,19 +231,21 @@
       });
     </script>
   
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              class="svg-stroke-container"
-              width="24"
-              height="24"
-              aria-hidden="true"
-              focusable="false"
-            >
-              <path
-                fill="#D70F64"
-                d="M12 2.75a4.75 4.75 0 014.744 4.5h3.103a1 1 0 01.99 1.141l-1.714 12a1 1 0 01-.99.859H5.867a1 1 0 01-.99-.859l-1.714-12a1 1 0 01.99-1.141h3.103A4.75 4.75 0 0112 2.75zm5.559 14.75H6.44a.4.4 0 00-.396.457l.208 1.45a.4.4 0 00.396.343H17.35a.4.4 0 00.396-.343l.208-1.45a.4.4 0 00-.396-.457zm1.25-8.75H5.19a.4.4 0 00-.396.457l.922 6.45a.4.4 0 00.396.343h11.775a.4.4 0 00.396-.343l.922-6.45a.4.4 0 00-.396-.457zM12 4.25a3.251 3.251 0 00-3.193 2.638.305.305 0 00.3.362h5.796a.297.297 0 00.292-.35A3.251 3.251 0 0012 4.25z"
-              ></path>
-            </svg>
+    <a href="pay.html">       
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        class="svg-stroke-container"
+        width="24"
+        height="24"
+        aria-hidden="true"
+        focusable="false"
+      >
+        <path
+          fill="#D70F64"
+          d="M12 2.75a4.75 4.75 0 014.744 4.5h3.103a1 1 0 01.99 1.141l-1.714 12a1 1 0 01-.99.859H5.867a1 1 0 01-.99-.859l-1.714-12a1 1 0 01.99-1.141h3.103A4.75 4.75 0 0112 2.75zm5.559 14.75H6.44a.4.4 0 00-.396.457l.208 1.45a.4.4 0 00.396.343H17.35a.4.4 0 00.396-.343l.208-1.45a.4.4 0 00-.396-.457zm1.25-8.75H5.19a.4.4 0 00-.396.457l.922 6.45a.4.4 0 00.396.343h11.775a.4.4 0 00.396-.343l.922-6.45a.4.4 0 00-.396-.457zM12 4.25a3.251 3.251 0 00-3.193 2.638.305.305 0 00.3.362h5.796a.297.297 0 00.292-.35A3.251 3.251 0 0012 4.25z"
+        ></path>
+      </svg>
+    </a> 
           </div>
         </nav>
       </header>
@@ -256,6 +258,25 @@
       </section>
     <div class="content">
         <h1>所有餐廳</h1>
+
+        <div class="filter-card">
+          <h2>篩選條件</h2>
+          <form id="filter-form">
+              <label>
+                  <input type="checkbox" value="Taiwanese" class="filter-option"> Taiwanese
+              </label>
+              <label>
+                  <input type="checkbox" value="American" class="filter-option"> American
+              </label>
+              <label>
+                <input type="checkbox" value="Drink" class="filter-option"> Drink
+            </label>
+              <label>
+                  <input type="checkbox" value="Vegetable" class="filter-option"> Vegetable
+              </label>
+          </form>
+      </div>
+
         <div class="restaurants">
           <a href="taichung1dish.html" class="restaurant-link">
             <div class="restaurant">
@@ -301,5 +322,23 @@
           </a>
         </div>
     </div>
+
+    <script>
+      // 篩選功能
+      document.getElementById('filter-form').addEventListener('change', function () {
+          const selectedOptions = Array.from(document.querySelectorAll('.filter-option:checked')).map(opt => opt.value);
+  
+          document.querySelectorAll('.restaurant').forEach(restaurant => {
+              const tags = restaurant.querySelector('p:nth-of-type(1)').textContent.split(' · ');
+              const match = selectedOptions.some(option => tags.includes(option));
+  
+              if (selectedOptions.length === 0 || match) {
+                  restaurant.style.display = '';
+              } else {
+                  restaurant.style.display = 'none';
+              }
+          });
+      });
+  </script>
 </body>
 </html>

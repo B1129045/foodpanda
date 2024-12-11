@@ -85,12 +85,12 @@
 <body>
     <!-- 頁面標頭 -->
     <header class="header">
-        <img src="./images/curry_header.jpg" alt="Foodpanda Logo">
+        <img src="images/ftlogo.png">
     </header>
 
     <!-- 餐廳資訊 -->
     <section class="restaurant-info">
-        <img src="https://images.deliveryhero.io/image/fd-tw/LH/curry-listing.jpg" alt="小吉咖喱 vendor logo">
+        <img src="images/tp1.png" alt="小吉咖喱 vendor logo">
         <div class="restaurant-details">
             <h1>小吉咖喱（台北八德店）</h1>
             <p>日式 · 咖喱 · 店內用餐</p>
@@ -105,7 +105,7 @@
         <div class="menu-items">
             <!-- 餐點卡片 -->
             <div class="menu-card">
-                <img src="./images/curry_pork.jpg" alt="炸豬排咖喱">
+                <img src="./images/tp1a.png" alt="炸豬排咖喱">
                 <div class="card-content">
                     <h3>炸豬排咖喱</h3>
                     <p>從 $150</p>
@@ -114,7 +114,7 @@
                 </div>
             </div>
             <div class="menu-card">
-                <img src="./images/curry_chicken.jpg" alt="炸雞排咖喱">
+                <img src="./images/tp1b.png" alt="炸雞排咖喱">
                 <div class="card-content">
                     <h3>炸雞排咖喱</h3>
                     <p>從 $140</p>
@@ -123,7 +123,7 @@
                 </div>
             </div>
             <div class="menu-card">
-                <img src="https://images.deliveryhero.io/image/fd-tw/Products/28616016.jpg?width=150&amp;height=150" alt="素食咖喱">
+                <img src="./images/tp1c.png">
                 <div class="card-content">
                     <h3>素食咖喱</h3>
                     <p>從 $120</p>
@@ -145,16 +145,17 @@
         </div>
         <a href="pay.html"><button id="checkout-btn">結帳</button></a>
     </div>
-
     <script>
-        let cart = [];
-
+        // 購物車數據
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    
+        // 渲染購物車內容
         function updateCart() {
             const cartItemsContainer = document.getElementById('cart-items');
-            cartItemsContainer.innerHTML = '';
-
+            cartItemsContainer.innerHTML = ''; // 清空舊的購物車項目
+    
             let totalPrice = 0;
-
+    
             cart.forEach(item => {
                 let listItem = document.createElement('li');
                 listItem.textContent = `${item.name} - ${item.price}元 x ${item.quantity}`;
@@ -165,24 +166,32 @@
                 cartItemsContainer.appendChild(listItem);
                 totalPrice += item.price * item.quantity;
             });
-
+    
             document.getElementById('total-price').textContent = totalPrice;
+    
+            // 將購物車內容存到 localStorage
+            localStorage.setItem('cart', JSON.stringify(cart));
         }
-
+    
+        // 添加商品到購物車
         function addToCart(product) {
             const existingProduct = cart.find(item => item.name === product.name);
             if (existingProduct) {
-                existingProduct.quantity += 1;
+                existingProduct.quantity += 1; // 增加數量
             } else {
-                cart.push({ ...product, quantity: 1 });
+                cart.push({ ...product, quantity: 1 }); // 新商品添加
             }
-            updateCart();
+            updateCart(); // 更新購物車顯示
         }
-
+    
+        // 從購物車移除商品
         function removeFromCart(productName) {
             cart = cart.filter(item => item.name !== productName);
             updateCart();
         }
+    
+        // 頁面載入時初始化購物車
+        updateCart();
     </script>
 </body>
 

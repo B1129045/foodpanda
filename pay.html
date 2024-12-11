@@ -16,39 +16,137 @@
             color: #333;
         }
 
+        #checkout-container {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            padding: 30px;
+            gap: 20px;
+        }
+
         #checkout-page {
+            flex: 1;
             max-width: 600px;
-            margin: 30px auto;
             padding: 20px;
             background-color: white;
             border-radius: 10px;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         }
 
+        #checkout-summary-container {
+            width: 300px;
+            padding: 20px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            height: fit-content;
+        }
+
         #checkout-summary {
             margin-bottom: 20px;
         }
 
-        #checkout-summary div {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 10px;
-            font-size: 16px;
-        }
-
-        #checkout-summary div strong {
-            color: #ff5a5f;
-        }
-
         .item-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #ddd;
         }
 
-        .item-row span {
+        .item-name {
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .item-controls {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 5px;
+        }
+
+        .item-controls button {
+            width: 30px;
+            height: 30px;
+            font-size: 16px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #f1f1f1;
+            cursor: pointer;
+        }
+
+        .item-controls button:hover {
+            background-color: #e6e6e6;
+        }
+
+        .item-price {
             font-size: 14px;
             color: #555;
+        }
+
+        #cart-total {
+            text-align: right;
+            font-size: 18px;
+            font-weight: bold;
+            color: #ff5a5f; /* FOODPANDA 粉色 */
+        }
+
+        #delivery-options {
+            margin: 20px 0;
+            padding: 15px;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .delivery-option {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .delivery-option:hover {
+            border-color: #ff5a5f;
+        }
+
+        .delivery-option input {
+            margin-right: 10px;
+        }
+
+        .delivery-option.selected {
+            border-color: #ff5a5f;
+            background-color: #fff3f3;
+        }
+
+        #payment-method-options {
+            margin: 20px 0;
+        }
+
+        .payment-option {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .payment-option:hover {
+            border-color: #ff5a5f;
+        }
+
+        .payment-option input {
+            margin-right: 10px;
+        }
+
+        .payment-option img {
+            height: 30px;
+            margin-right: 10px;
         }
 
         #checkout-form label {
@@ -82,121 +180,168 @@
         #checkout-form button:hover {
             background-color: #e0484c;
         }
-
-        #cart-total {
-            text-align: right;
-            font-size: 18px;
-            font-weight: bold;
-        }
-
-        .section-title {
-            margin: 20px 0 10px;
-            font-size: 18px;
-            font-weight: bold;
-        }
     </style>
 </head>
 
 <body>
-    <div id="checkout-page">
-        <h2>結帳</h2>
+    <div id="checkout-container">
+        <div id="checkout-page">
+            <h2>結帳</h2>
 
-        <!-- 訂購商品摘要 -->
-        <div id="checkout-summary">
-            <h3 class="section-title">訂購商品</h3>
-            <div class="item-row">
-                <span>商品 A x 2</span>
-                <span>200 元</span>
+            <!-- 外送選項 -->
+            <div id="delivery-options">
+                <h3>外送選項</h3>
+                <div class="delivery-option">
+                    <input type="radio" name="delivery" id="standard-delivery" value="standard" checked>
+                    <label for="standard-delivery">標準 約 30 - 45 分鐘</label>
+                </div>
+                <div class="delivery-option">
+                    <input type="radio" name="delivery" id="priority-delivery" value="priority">
+                    <label for="priority-delivery">優先專送 約 25 - 40 分鐘 + $29</label>
+                </div>
+                <div class="delivery-option">
+                    <input type="radio" name="delivery" id="scheduled-delivery" value="scheduled">
+                    <label for="scheduled-delivery">預約訂單 選擇日期及時間</label>
+                </div>
             </div>
-            <div class="item-row">
-                <span>商品 B x 1</span>
-                <span>300 元</span>
+
+            <!-- 付款方式 -->
+            <div id="payment-method-options">
+                <h3>付款方式</h3>
+                <div class="payment-option">
+                    <input type="radio" name="payment-method" id="cash-payment" value="cash">
+                    <img src="https://via.placeholder.com/50x30?text=現金" alt="現金圖示">
+                    <label for="cash-payment">現金付款</label>
+                </div>
+                <div class="payment-option">
+                    <input type="radio" name="payment-method" id="credit-card-payment" value="credit-card">
+                    <img src="https://via.placeholder.com/50x30?text=信用卡" alt="信用卡圖示">
+                    <label for="credit-card-payment">
+                        信用卡
+                    </label>
+                </div>
+                <div class="payment-option">
+                    <input type="radio" name="payment-method" id="line-pay-payment" value="line-pay">
+                    <img src="https://via.placeholder.com/50x30?text=LINE+PAY" alt="LINE PAY 圖示">
+                    <label for="line-pay-payment">LINE PAY</label>
+                </div>
             </div>
-            <div id="cart-total">
-                總金額: <strong>500 元</strong>
-            </div>
+
+            <!-- 表單開始 -->
+            <form id="checkout-form">
+                <label for="address">送餐地址</label>
+                <input type="text" id="address" name="address" placeholder="請輸入送餐地址" required>
+
+                <label for="name">姓名</label>
+                <input type="text" id="name" name="name" required>
+
+                <label for="phone">電話</label>
+                <input type="tel" id="phone" name="phone" required>
+
+                <button type="submit">確認訂單</button>
+            </form>
         </div>
 
-        <!-- 表單開始 -->
-        <form id="checkout-form">
-            <!-- 外送地址 -->
-            <h3 class="section-title">外送地址</h3>
-            <label for="address">送餐地址</label>
-            <input type="text" id="address" name="address" placeholder="請輸入送餐地址" value="台北市中山區南京東路 123 號" required>
-
-            <!-- 選擇付款方式 -->
-            <h3 class="section-title">付款方式</h3>
-            <label for="payment-method">付款方式</label>
-            <select id="payment-method" name="payment-method" required>
-                <option value="credit-card">信用卡</option>
-                <option value="cash">貨到付款</option>
-                <option value="line-pay">LINE Pay</option>
-            </select>
-
-            <!-- 個人資料確認 -->
-            <h3 class="section-title">個人資料</h3>
-            <label for="name">姓名</label>
-            <input type="text" id="name" name="name" placeholder="請輸入您的姓名" value="王小明" required>
-
-            <label for="phone">電話</label>
-            <input type="tel" id="phone" name="phone" placeholder="請輸入聯絡電話" value="0912345678" required>
-
-            <!-- 提交按鈕 -->
-            <button type="submit">確認訂單</button>
-        </form>
+        <div id="checkout-summary-container">
+            <h3>您的訂單</h3>
+            <div id="checkout-summary">
+                <div id="cart-summary-items">
+                    <!-- 這裡會顯示訂購商品 -->
+                </div>
+                <div id="cart-total">
+                    總金額: <strong>0 元</strong>
+                </div>
+            </div>
+        </div>
     </div>
 
     <script>
-        // 初始化模擬數據
-        let cart = [
-            { name: '商品 A', quantity: 2, price: 100 },
-            { name: '商品 B', quantity: 1, price: 300 },
-        ];
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
-        // 更新訂購商品列表
+        // 渲染訂購商品摘要
         function renderCartSummary() {
-            const summaryContainer = document.getElementById('checkout-summary');
+            const summaryContainer = document.getElementById('cart-summary-items');
             const totalRow = document.getElementById('cart-total');
             let totalPrice = 0;
 
-            summaryContainer.innerHTML = '<h3 class="section-title">訂購商品</h3>';
+            summaryContainer.innerHTML = ''; // 清空舊內容
 
-            cart.forEach(item => {
+            cart.forEach((item, index) => {
                 const itemRow = document.createElement('div');
                 itemRow.className = 'item-row';
-                itemRow.innerHTML = `<span>${item.name} x ${item.quantity}</span><span>${item.price * item.quantity} 元</span>`;
+                itemRow.innerHTML = `
+                    <div class="item-name">${item.name}</div>
+                    <div class="item-controls">
+                        <button class="decrease-btn" data-index="${index}">-</button>
+                        <span>${item.quantity}</span>
+                        <button class="increase-btn" data-index="${index}">+</button>
+                    </div>
+                    <div class="item-price">${item.price * item.quantity} 元</div>
+                `;
                 summaryContainer.appendChild(itemRow);
                 totalPrice += item.price * item.quantity;
             });
 
+            // 檢查外送選項
+            const deliveryOption = document.querySelector('input[name="delivery"]:checked').value;
+            if (deliveryOption === 'priority') {
+                totalPrice += 29; // 加上 29 元
+            }
+
             totalRow.innerHTML = `總金額: <strong>${totalPrice} 元</strong>`;
         }
 
-        // 提交訂單
-        document.getElementById('checkout-form').addEventListener('submit', event => {
-            event.preventDefault();
+        // 更新數量
+        function updateQuantity(index, delta) {
+            cart[index].quantity += delta;
+            if (cart[index].quantity < 1) {
+                cart.splice(index, 1); // 如果數量少於 1，移除該項目
+            }
+            localStorage.setItem('cart', JSON.stringify(cart));
+            renderCartSummary();
+        }
 
+        // 綁定按鈕事件
+        document.getElementById('cart-summary-items').addEventListener('click', (event) => {
+            const index = event.target.dataset.index;
+            if (event.target.classList.contains('increase-btn')) {
+                updateQuantity(index, 1);
+            } else if (event.target.classList.contains('decrease-btn')) {
+                updateQuantity(index, -1);
+            }
+        });
+
+        // 綁定外送選項切換事件
+        document.getElementById('delivery-options').addEventListener('change', () => {
+            renderCartSummary();
+        });
+
+        // 提交訂單
+        document.getElementById('checkout-form').addEventListener('submit', (event) => {
+            event.preventDefault();
             const address = document.getElementById('address').value;
-            const paymentMethod = document.getElementById('payment-method').value;
+            const paymentMethod = document.querySelector('input[name="payment-method"]:checked').value;
             const name = document.getElementById('name').value;
             const phone = document.getElementById('phone').value;
+            const deliveryOption = document.querySelector('input[name="delivery"]:checked').value;
 
             const orderDetails = {
                 cart,
                 address,
                 paymentMethod,
+                deliveryOption,
                 customerInfo: { name, phone },
             };
 
             console.log('訂單內容:', orderDetails);
             alert('訂單提交成功！謝謝您的購買！');
 
-            // 清空購物車，重置頁面
             cart = [];
+            localStorage.removeItem('cart');
             renderCartSummary();
         });
 
-        // 頁面載入時更新購物車摘要
+        // 初始化頁面
         renderCartSummary();
     </script>
 </body>
