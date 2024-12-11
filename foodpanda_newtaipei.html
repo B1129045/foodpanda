@@ -256,6 +256,26 @@
       </section>
     <div class="content">
         <h1>所有餐廳</h1>
+
+        <div class="filter-card">
+          <h2>篩選條件</h2>
+          <form id="filter-form">
+              <label>
+                  <input type="checkbox" value="Taiwanese" class="filter-option"> Taiwanese
+              </label>
+              <label>
+                  <input type="checkbox" value="American" class="filter-option"> American
+              </label>
+              <label>
+                  <input type="checkbox" value="Drink" class="filter-option"> Drink
+              </label>
+              <label>
+                <input type="checkbox" value="Vegetable" class="filter-option"> Vegetable
+              </label>
+              
+          </form>
+      </div>
+
         <div class="restaurants">
           <a href="nt1dish.html" class="restaurant-link">
               <div class="restaurant">
@@ -266,6 +286,7 @@
                           <span class="tag">迎新禮: 免外送服務費</span>
                       </div>
                       <h3>餘味重慶火鍋</h3>
+                      <p>242新北市新莊區中正路516-42號</p>
                       <p>Taiwanese</p>
                       <p class="rating">⭐ 4.7 (5000+)</p>
                   </div>
@@ -279,6 +300,7 @@
                           <span class="tag">迎新禮: 免外送服務費</span>
                       </div>
                       <h3>本土黃牛肉麵</h3>
+                      <p>242新北市新莊區新莊路751巷63號</p>
                       <p>Taiwanese</p>
                       <p class="rating">⭐ 4.5 (79)</p>
                   </div>
@@ -293,6 +315,7 @@
                           <span class="tag">迎新禮: 免外送服務費</span>
                       </div>
                       <h3>紅鬍子手工窯烤披薩</h3>
+                      <p>242新北市新莊區中正路514巷35之1號</p>
                       <p>American · In-Store Price</p>
                       <p class="rating">⭐ 4.7 (2000+)</p>
                   </div>
@@ -301,5 +324,38 @@
       </div>
       
     </div>
+
+    <script>
+      // 篩選功能
+      document.getElementById('filter-form').addEventListener('change', function () {
+          const selectedOptions = Array.from(document.querySelectorAll('.filter-option:checked')).map(opt => opt.value);
+  
+          document.querySelectorAll('.restaurant').forEach(restaurant => {
+              const tags = restaurant.querySelector('p:nth-of-type(2)').textContent.split(' · ');
+              const match = selectedOptions.some(option => tags.includes(option));
+  
+              if (selectedOptions.length === 0 || match) {
+                  restaurant.parentElement.style.display = '';
+              } else {
+                  restaurant.parentElement.style.display = 'none';
+              }
+          });
+      });
+  </script>
+
+    <!-- 購物車 -->
+    <div id="cart">
+      <h2>購物車</h2>
+      <ul id="cart-items">
+          <!-- 這裡會顯示購物車項目 -->
+      </ul>
+      <div id="cart-total">
+          <p>總金額: <span id="total-price">0</span> 元</p>
+      </div>
+      <a href="pay.html"><button id="checkout-btn">結帳</button></a>
+  </div>
+
+  
+  
 </body>
 </html>
