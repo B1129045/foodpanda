@@ -1,12 +1,7 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: vvv
- * Date: 2017/4/1
- * Time: 22:15
- */
+
 $email = $_GET['email'];                                      //得到email
-$conn = new mysqli('localhost','root','zht1741105','login');
+$conn = new mysqli('localhost','root','','login_table_user');
 $sql = "SELECT * FROM user WHERE email = '".$email."';";       //理由邮箱地址查询数据库
 $rs = $conn->query($sql);
 $row = $rs->fetch_assoc();

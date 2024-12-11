@@ -7,7 +7,7 @@
  */
 
     $r = $_GET['raccount'];    //获取账号
-    $conn = new mysqli('localhost','root','zht1741105','login');
+    $conn = new mysqli('localhost','root','','login_table_user');
     $sql = "SELECT * FROM user WHERE account = '".$r."';";  //根据账号查询
     $rs = $conn->query($sql);
     $row = $rs->fetch_assoc();

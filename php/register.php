@@ -19,7 +19,7 @@ if(!(empty($_GET["raccount"])&&empty($_GET["rpassword"]))) {
         echo "數據庫連接失敗";
     }
     //插入数据
-    $str = "INSERT INTO user(account,password,email,token,token_exptime,regtime) VALUES('$raccount','$rpassword','$email','$token','$token_exptime','$regtime');";
+    $str = "INSERT INTO user(account, password, email, token, token_exptime, regtime, status) VALUES('$raccount', '$rpassword', '$email', '$token', '$token_exptime', '$regtime', 1);";
     $result = $conn->query($str);
     /*if($result){
         echo "1";

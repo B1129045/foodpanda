@@ -166,7 +166,7 @@ class smtp
 
     function smtp_sockopen_mx($address)
     {
-        $domain = ereg_replace("^.+@([^@]+)$", "\\1", $address);
+        $domain = preg_replace("/^.+@([^@]+)$/", "\\1", $address);
         if (!@getmxrr($domain, $MXHOSTS)) {
             $this->log_write("Error: Cannot resolve MX \"" . $domain . "\"\n");
             return FALSE;
@@ -260,18 +260,16 @@ class smtp
     function strip_comment($address)
     {
         $comment = "\\([^()]*\\)";
-        while (mb_ereg($comment, $address)) {
-            $address = mb_ereg_replace($comment, "", $address);
+        while (preg_match("/$comment/", $address)) {
+            $address = preg_replace("/$comment/", "", $address);
         }
-
         return $address;
     }
 
     function get_address($address)
     {
-        $address = mb_ereg_replace("([ \t\r\n])+", "", $address);
-        $address = mb_ereg_replace("^.*<(.+)>.*$", "\\1", $address);
-
+        $address = preg_replace("/([ \t\r\n])+/","", $address);
+        $address = preg_replace("/^.*<(.+)>.*$/", "\\1", $address);
         return $address;
     }
 
