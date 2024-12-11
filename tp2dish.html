@@ -146,39 +146,17 @@
         </div>
         <a href="pay.html"><button id="checkout-btn">結帳</button></a>
     </div>
-    <!-- 結帳頁面容器 -->
-<div id="checkout-page" style="display: none;">
-    <h2>結帳</h2>
-    <div id="checkout-summary">
-        <!-- 顯示購物車內容 -->
-    </div>
-    <form id="checkout-form">
-        <h3>送餐資訊</h3>
-        <label for="name">姓名:</label>
-        <input type="text" id="name" name="name" required>
-        
-        <label for="address">地址:</label>
-        <input type="text" id="address" name="address" required>
-        
-        <label for="phone">電話:</label>
-        <input type="tel" id="phone" name="phone" required>
-
-        <button type="submit">確認訂單</button>
-    </form>
-</div>
-
-
     <script>
         // 購物車數據
-        let cart = [];
-
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    
         // 渲染購物車內容
         function updateCart() {
             const cartItemsContainer = document.getElementById('cart-items');
             cartItemsContainer.innerHTML = ''; // 清空舊的購物車項目
-
+    
             let totalPrice = 0;
-
+    
             cart.forEach(item => {
                 let listItem = document.createElement('li');
                 listItem.textContent = `${item.name} - ${item.price}元 x ${item.quantity}`;
@@ -189,10 +167,13 @@
                 cartItemsContainer.appendChild(listItem);
                 totalPrice += item.price * item.quantity;
             });
-
+    
             document.getElementById('total-price').textContent = totalPrice;
+    
+            // 將購物車內容存到 localStorage
+            localStorage.setItem('cart', JSON.stringify(cart));
         }
-
+    
         // 添加商品到購物車
         function addToCart(product) {
             const existingProduct = cart.find(item => item.name === product.name);
@@ -203,11 +184,16 @@
             }
             updateCart(); // 更新購物車顯示
         }
-
-        
-      
-
-</script>
+    
+        // 從購物車移除商品
+        function removeFromCart(productName) {
+            cart = cart.filter(item => item.name !== productName);
+            updateCart();
+        }
+    
+        // 頁面載入時初始化購物車
+        updateCart();
+    </script>
 
 </body>
 
