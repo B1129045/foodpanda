@@ -14,9 +14,9 @@ if(!(empty($_GET["raccount"])&&empty($_GET["rpassword"]))) {
     $regtime = time();                      //当前时间
     $token = md5($raccount.$_GET['rpassword'].$regtime);        //链接账号密码时间，md5加密得到token
     $token_exptime = time()+60*60*24;   //过期时间24小时
-    $conn = new mysqli('localhost', 'root', 'zht1741105', 'login');
+    $conn = new mysqli('localhost', 'root', '', 'login_table_user');
     if (mysqli_connect_errno()) {
-        echo "数据库连接失败";
+        echo "數據庫連接失敗";
     }
     //插入数据
     $str = "INSERT INTO user(account,password,email,token,token_exptime,regtime) VALUES('$raccount','$rpassword','$email','$token','$token_exptime','$regtime');";
@@ -33,7 +33,7 @@ if(!(empty($_GET["raccount"])&&empty($_GET["rpassword"]))) {
         $smtpemailto    = $email;
         $smtpuser       = "15527243273@163.com"; //SMTP服务器的用户帐号
         $smtppass       = "a625398609";          //SMTP服务器的用户密码
-        $mailsubject    = "注册激活";            //邮件主题
+        $mailsubject    = "註冊激活";            //邮件主题
         $mailsubject    = "=?UTF-8?B?" . base64_encode($mailsubject) . "?=";    //防止乱码
         $mailbody       = "亲爱的".$raccount.":<br/>感谢在我站注册了新账号.<br/>请点击链接激活您的账号<br/>
         <a href='http://localhost:63342/Login/php/active.php?verify=".$token."' target='_blank'>
@@ -44,10 +44,10 @@ if(!(empty($_GET["raccount"])&&empty($_GET["rpassword"]))) {
         $smtp->debug    = FALSE;                 //是否显示发送的调试信息
         $rs = $smtp->sendmail($smtpemailto, $smtpusermail, $mailsubject, $mailbody, $mailtype);
         if($rs==1) {
-            echo "注册成功！请尽快激活<a href='../html/login.html' target='_blank'>返回</a>登录页面";
+            echo "註冊成功！請盡快激活<a href='../html/login.html' target='_blank'>返回</a>登入页面";
         }
     }else {
-        echo "注册失败！<a href='../html/register.html'>返回</a>";
+        echo "註冊失敗！<a href='../html/register.html'>返回</a>";
     }
 }
 ?>

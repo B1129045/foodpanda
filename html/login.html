@@ -2,7 +2,7 @@
 <html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
-    <title>登录</title>
+    <title>登入</title>
     <script type="text/javascript" src="../js/md5.js"></script>
     <style type="text/css">
         #mid{
@@ -34,11 +34,11 @@
                 form.account.focus();
                 return false;
             }else if(form.password.value.trim()==""){
-                alert("密码不能为空！");
+                alert("密碼不能為空！");
                 form.password.focus();
                 return false;
             }else if(form.vcode.value == "") {
-                alert("请输入验证码");
+                alert("請輸入驗證碼");
                 form.vcode.focus();
                 return false;
             }
@@ -74,14 +74,14 @@
 
 <div id="mid"><div id="login">
     <form id="form" method="get" action="../php/login.php" onsubmit="return checkForm(this)">
-        <input type="text"   id="account" name="account" placeholder="请输入账号" style="width:200px;height:15px;" ><br/><br/>
-        <input type="password"  id="password" name="password" placeholder="请输入密码" style="width:200px;height:15px;"><br/><br/>
-        <input type="text"   id="vcode" name="vcode" placeholder="请输入验证码"  style="width:90px;height:15px;">
+        <input type="text"   id="account" name="account" placeholder="請輸入帳號" style="width:200px;height:15px;" ><br/><br/>
+        <input type="password"  id="password" name="password" placeholder="請輸入密碼" style="width:200px;height:15px;"><br/><br/>
+        <input type="text"   id="vcode" name="vcode" placeholder="請輸入驗證碼"  style="width:90px;height:15px;">
         <img id="yzm" name="yzm" src="../php/yzm.php?r=<?php echo rand();?>" style="width:100px;height:25px;"><br/>
-        <small>看不清?</small><a href onclick="document.getElementById('yzm').src='../php/yzm.php?r='+Math().random()"><small>换一个</small></a>
-        <input type="submit" id="submit" value="登录" style="width:200px;"/>
+        <small>看不清楚？</small><a href onclick="document.getElementById('yzm').src='../php/yzm.php?r='+Math().random()"><small>換一個</small></a>
+        <input type="submit" id="submit" value="登入" style="width:200px;"/>
     <ul>
-            <small>没有账号?</small><a href="register.html"><small>注册</small></a><small>一个吧!</small>
+            <small>没有帳號？</small><a href="register.html"><small>註冊</small></a><small>一個吧!</small>
     </ul>
     </form>
 </div></div>
