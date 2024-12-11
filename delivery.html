@@ -64,22 +64,60 @@
             color: #555;
         }
 
-        .notifications {
+        .progress-container {
+            display: flex;
+            align-items: center;
             margin: 20px 0;
         }
 
-        .notification {
-            margin-bottom: 10px;
-            padding: 10px;
-            border: 1px solid #ddd;
+        .progress-bar {
+            flex: 1;
+            background-color: #ddd;
             border-radius: 5px;
-            background-color: #fff;
+            overflow: hidden;
+            height: 10px;
+            display: flex;
+            position: relative;
+        }
+
+        .progress-bar-inner {
+            height: 100%;
+            background-color: #ff69b4;
+            width: 0%;
+            transition: width 0.5s ease-in-out;
+        }
+
+        .progress-segment {
+            flex: 1;
+            border-right: 1px solid white;
+            position: relative;
+        }
+
+        .progress-segment:last-child {
+            border-right: none;
+        }
+
+        .progress-image {
+            margin-left: 10px;
+            height: 80px;
         }
     </style>
 </head>
 
 <body>
     <div id="order-tracking-page">
+        <!-- 預估外送時間進度條 -->
+        <div id="progress-bar-container">
+            <h3>預估送達時間與外送進度</h3>
+            <p>外送員預計在 <strong>15 分鐘內</strong> 抵達。</p>
+            <div class="progress-container">
+                <div class="progress-bar">
+                    <div class="progress-bar-inner"></div>
+                </div>
+                <img src="./images/panda.jpg" alt="Panda" class="progress-image">
+            </div>
+        </div>
+
         <h2>訂單追蹤</h2>
 
         <!-- 訂單狀態 -->
@@ -96,17 +134,6 @@
         <div id="delivery-map" class="delivery-map">
             模擬地圖顯示外送員位置
         </div>
-
-        <!-- 預估送達時間 -->
-        <div id="estimated-time">
-            <h3>預估送達時間</h3>
-            <p>外送員預計在 <strong>15 分鐘內</strong> 抵達。</p>
-        </div>
-
-        <!-- 推送通知 -->
-        <div id="notifications" class="notifications">
-            <h3>推送通知</h3>
-        </div>
     </div>
 
     <script>
@@ -116,11 +143,6 @@
             { step: "外送員已接單", completed: true },
             { step: "外送中", completed: false },
             { step: "已送達", completed: false },
-        ];
-
-        let notifications = [
-            "訂單已確認。",
-            "外送員已接單，正在前往餐廳取餐。",
         ];
 
         // 更新訂單狀態
@@ -152,28 +174,23 @@
             }, 10000);
         }
 
-        // 顯示推送通知
-        function pushNotification(message) {
-            notifications.push(message);
-            const notificationContainer = document.getElementById("notifications");
-            const notificationDiv = document.createElement("div");
-            notificationDiv.className = "notification";
-            notificationDiv.textContent = message;
-            notificationContainer.appendChild(notificationDiv);
+        // 更新進度條
+        function updateProgressBar() {
+            const progressBarInner = document.querySelector(".progress-bar-inner");
+            let progress = 0;
+            const interval = setInterval(() => {
+                progress += 25;
+                progressBarInner.style.width = progress + "%";
+                if (progress >= 100) {
+                    clearInterval(interval);
+                }
+            }, 3000);
         }
 
         // 初始化頁面
         updateOrderStatus();
         updateDeliveryMap();
-
-        // 模擬推送通知
-        setTimeout(() => pushNotification("外送員正在餐廳取餐中。"), 5000);
-        setTimeout(() => pushNotification("外送員已出發，預計 15 分鐘後送達。"), 10000);
-        setTimeout(() => {
-            orderStatus[2].completed = true;
-            updateOrderStatus();
-            pushNotification("訂單已完成，感謝您的使用！");
-        }, 15000);
+        updateProgressBar();
     </script>
 </body>
 
