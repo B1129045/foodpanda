@@ -27,26 +27,9 @@ if(!(empty($_GET["raccount"])&&empty($_GET["rpassword"]))) {
         echo "0";
     }*/
     if ($result) {
-        $smtpserver     = "smtp.163.com";        //SMTP服务器
-        $smtpserverport = 25;                    //SMTP服务器端口
-        $smtpusermail   = "15527243273@163.com"; //SMTP服务器的用户邮箱
-        $smtpemailto    = $email;
-        $smtpuser       = "15527243273@163.com"; //SMTP服务器的用户帐号
-        $smtppass       = "a625398609";          //SMTP服务器的用户密码
-        $mailsubject    = "註冊激活";            //邮件主题
-        $mailsubject    = "=?UTF-8?B?" . base64_encode($mailsubject) . "?=";    //防止乱码
-        $mailbody       = "亲爱的".$raccount.":<br/>感谢在我站注册了新账号.<br/>请点击链接激活您的账号<br/>
-        <a href='http://localhost:63342/Login/php/active.php?verify=".$token."' target='_blank'>
-        http://localhost:80/Login/php/active.php?verify=".$token."</a><br/>     
-        如果以上链接无法点击，请在浏览器地址栏中复制访问，该链接24小时有效。";  //邮件内容,点击进入active.php处理
-        $mailtype       = "HTML";                //邮件格式
-        $smtp           = new smtp($smtpserver, $smtpserverport, true, $smtpuser, $smtppass); //这里面的一个true是表示使用身份验证,否则不使用身份验证.
-        $smtp->debug    = FALSE;                 //是否显示发送的调试信息
-        $rs = $smtp->sendmail($smtpemailto, $smtpusermail, $mailsubject, $mailbody, $mailtype);
-        if($rs==1) {
-            echo "註冊成功！請盡快激活<a href='../html/login.html' target='_blank'>返回</a>登入页面";
-        }
-    }else {
+        header("Location: ../profile.html");
+        exit();
+    } else {
         echo "註冊失敗！<a href='../html/register.html'>返回</a>";
     }
 }

@@ -36,7 +36,7 @@ if($code != $yzm){             //验证码不同
     }else if($row['status']==0){
         echo "帳號未激活，請激活後<a href='../html/login.html'>登录</a>";
     }else {
-        header("location:http://localhost/foodpanda/new_index.html");           //登陆成功挑战到默认页面；
+        header("location:http://localhost/foodpanda/profile.html");           //登陆成功挑战到默认页面；
         exit;
     }
     $conn->close();

@@ -124,5 +124,35 @@
     </div>
 </div>
 
+<script>
+    document.getElementById('form').addEventListener('submit', async function(event) {
+        event.preventDefault(); // 防止表單默認提交
+
+        const formData = {
+            raccount: document.getElementById('raccount').value,
+            email: document.getElementById('email').value,
+            rpassword: document.getElementById('rpassword').value
+        };
+
+        try {
+            const response = await fetch('/api/register', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(formData)
+            });
+
+            if (response.ok) {
+                window.location.href = '/foodpanda/profile.html'; // 跳轉到 profile.html
+            } else {
+                const error = await response.json();
+                alert(`註冊失敗: ${error.message}`);
+            }
+        } catch (error) {
+            console.error('註冊時發生錯誤:', error);
+            alert('註冊時發生錯誤，請稍後再試！');
+        }
+    });
+</script>
+
 </body>
 </html>
