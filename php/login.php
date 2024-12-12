@@ -32,9 +32,9 @@ if($code != $yzm){             //验证码不同
     $rs = $conn->query($str);
     $row = $rs->fetch_array();
     if(!$row) {
-        echo "用户名或密碼錯誤，请<a href='../html/login.html'>返回</a>重新登入!";
+        echo "用户名稱或密碼錯誤，请<a href='../html/login.html'>返回</a>重新登入!";
     }else if($row['status']==0){
-        echo "帳號未激活，請激活後<a href='../html/login.html'>登录</a>";
+        echo "帳號未激活，請激活後<a href='../html/login.html'>登入</a>";
     }else {
         header("location:http://localhost/foodpanda/profile.html");           //登陆成功挑战到默认页面；
         exit;
