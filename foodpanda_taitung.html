@@ -258,6 +258,36 @@
       </section>
     <div class="content">
         <h1>所有餐廳</h1>
+        <div class="filter-card">
+          <h2>篩選條件</h2>
+          <form id="filter-form">
+              <label>
+                  <input type="checkbox" value="Taiwanese" class="filter-option"> Taiwanese
+              </label>
+              <label>
+                  <input type="checkbox" value="American" class="filter-option"> American
+              </label>
+              <label>
+                <input type="checkbox" value="Japanese" class="filter-option"> Japanese
+            </label>
+            <label>
+              <input type="checkbox" value="Italian" class="filter-option"> Italian
+          </label>
+              <label>
+                  <input type="checkbox" value="Drink" class="filter-option"> Drink
+              </label>
+              <label>
+                <input type="checkbox" value="Vegetable" class="filter-option"> Vegetable
+              </label>
+              <label>
+                <input type="checkbox" value="Cafe" class="filter-option"> Cafe
+            </label>
+            <label>
+              <input type="checkbox" value="Brunch" class="filter-option"> Brunch
+          </label>
+              
+          </form>
+      </div>
         <div class="restaurants">
           <a href="td1dish.html" class="restaurant-link">
             <div class="restaurant">
@@ -303,5 +333,22 @@
           </a>
         </div>
     </div>
+    <script>
+      // 篩選功能
+      document.getElementById('filter-form').addEventListener('change', function () {
+          const selectedOptions = Array.from(document.querySelectorAll('.filter-option:checked')).map(opt => opt.value);
+  
+          document.querySelectorAll('.restaurant').forEach(restaurant => {
+              const tags = restaurant.querySelector('p:nth-of-type(1)').textContent.split(' · ');
+              const match = selectedOptions.some(option => tags.includes(option));
+  
+              if (selectedOptions.length === 0 || match) {
+                  restaurant.style.display = '';
+              } else {
+                  restaurant.style.display = 'none';
+              }
+          });
+      });
+  </script>
 </body>
 </html>
