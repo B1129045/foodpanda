@@ -1,8 +1,5 @@
 from flask import Flask, render_template, request, jsonify
 from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy import create_engine, Column, Integer, String
-from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import sessionmaker
 
 app = Flask(__name__)
 
@@ -48,6 +45,7 @@ def update_member():
     db.session.commit()
     return jsonify({'message': '會員資料更新成功'}), 200
 
+# 註冊新會員
 @app.route('/api/register', methods=['POST'])
 def register():
     data = request.json
@@ -60,35 +58,5 @@ def register():
     db.session.commit()
     return jsonify({'message': '註冊成功'}), 201
 
-# 創建資料庫引擎，連接到 profile.sql
-engine = create_engine('sqlite:///profile.sql', echo=True)
-
-# 創建基類
-Base = declarative_base()
-
-# 定義資料表
-class Member(Base):
-    __tablename__ = 'members'
-
-    id = Column(Integer, primary_key=True)
-    name = Column(String, nullable=False)
-    email = Column(String, unique=True, nullable=False)
-    phone = Column(String)
-    password = Column(String, nullable=False)
-
-# 創建資料表
-Base.metadata.create_all(engine)
-
-# 創建會話
-Session = sessionmaker(bind=engine)
-session = Session()
-
-# 新增數據
-new_member = Member(name='John Doe', email='john@example.com', phone='1234567890', password='securepassword')
-session.add(new_member)
-
-# 提交會話
-session.commit()
-
-# 關閉會話
-session.close()
+if __name__ == '__main__':
+    app.run(debug=True)
