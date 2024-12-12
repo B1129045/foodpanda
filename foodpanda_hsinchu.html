@@ -105,7 +105,7 @@
             </g>
           </svg>
           <span class="logo"
-            ><svg
+            ><a href="index.html" style="text-decoration: none; color: inherit;"></a><svg
               aria-hidden="true"
               focusable="false"
               version="1.1"
@@ -160,7 +160,7 @@
                   </g>
                 </g>
               </g></svg
-            >foodpanda</span
+            ></a><a href="index.html" style="text-decoration: none; color: inherit;">foodpanda</a></span
           >
           <div>
             <button id="loginBtn" class="login-btn">
@@ -258,41 +258,88 @@
       </section>
     <div class="content">
         <h1>所有餐廳</h1>
+        <div class="filter-card">
+          <h2>篩選條件</h2>
+          <form id="filter-form">
+              <label>
+                  <input type="checkbox" value="Taiwanese" class="filter-option"> Taiwanese
+              </label>
+              <label>
+                  <input type="checkbox" value="American" class="filter-option"> American
+              </label>
+              <label>
+                <input type="checkbox" value="Japanese" class="filter-option"> Japanese
+            </label>
+            <label>
+              <input type="checkbox" value="Italian" class="filter-option"> Italian
+          </label>
+              <label>
+                  <input type="checkbox" value="Drink" class="filter-option"> Drink
+              </label>
+              <label>
+                <input type="checkbox" value="Vegetable" class="filter-option"> Vegetable
+              </label>
+              <label>
+                <input type="checkbox" value="Cafe" class="filter-option"> Cafe
+            </label>
+            <label>
+              <input type="checkbox" value="Brunch" class="filter-option"> Brunch
+          </label>
+              
+          </form>
+      </div>
         <div class="restaurants">
             <div class="restaurant">
-                <img src="https://via.placeholder.com/300x150" alt="新竹餐廳">
+                <img src="./images/taoyuan99.jpg" alt="新竹餐廳">
                 <div class="details">
                     <div class="tags">
                         <span class="tag">滿 $200 享 9 折</span>
                     </div>
                     <h3>新竹餐廳</h3>
-                    <p>台式 · 新竹市區</p>
+                    <p>Taiwanese</p>
                     <p class="rating">⭐ 4.6 (300+)</p>
                 </div>
             </div>
             <div class="restaurant">
-                <img src="https://via.placeholder.com/300x150" alt="新竹咖啡館">
+                <img src="./images/tp3c.png" alt="新竹咖啡館">
                 <div class="details">
                     <div class="tags">
                         <span class="tag">限時優惠: 免運費</span>
                     </div>
                     <h3>新竹咖啡館</h3>
-                    <p>咖啡 · 新竹市東區</p>
+                    <p>Taiwanese</p>
                     <p class="rating">⭐ 4.7 (500+)</p>
                 </div>
             </div>
             <div class="restaurant">
-                <img src="https://via.placeholder.com/300x150" alt="新竹披薩">
+                <img src="./images/taich1b.png" alt="新竹披薩">
                 <div class="details">
                     <div class="tags">
                         <span class="tag">滿 $250 享 8.5 折</span>
                     </div>
                     <h3>新竹披薩</h3>
-                    <p>義式料理 · 新竹市大學路</p>
+                    <p>Italian</p>
                     <p class="rating">⭐ 4.8 (100+)</p>
                 </div>
             </div>
         </div>
     </div>
+    <script>
+      // 篩選功能
+      document.getElementById('filter-form').addEventListener('change', function () {
+          const selectedOptions = Array.from(document.querySelectorAll('.filter-option:checked')).map(opt => opt.value);
+  
+          document.querySelectorAll('.restaurant').forEach(restaurant => {
+              const tags = restaurant.querySelector('p:nth-of-type(1)').textContent.split(' · ');
+              const match = selectedOptions.some(option => tags.includes(option));
+  
+              if (selectedOptions.length === 0 || match) {
+                  restaurant.style.display = '';
+              } else {
+                  restaurant.style.display = 'none';
+              }
+          });
+      });
+  </script>
 </body>
 </html>
